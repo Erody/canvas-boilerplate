@@ -1,18 +1,18 @@
 // Initial Setup
-var canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 
 // Variables
-var mouse = {
+let mouse = {
 	x: innerWidth / 2,
 	y: innerHeight / 2 
 };
 
-var colors = [
+const colors = [
 	'#2185C5',
 	'#7ECEFD',
 	'#FFF6E5',
@@ -74,7 +74,6 @@ function init() {
 // Animation Loop
 function animate() {
 	requestAnimationFrame(animate);
-
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
 }
