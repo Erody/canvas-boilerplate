@@ -73,6 +73,10 @@
 "use strict";
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 // Initial Setup
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
@@ -97,6 +101,8 @@ addEventListener("mousemove", function (event) {
 addEventListener("resize", function () {
 	canvas.width = innerWidth;
 	canvas.height = innerHeight;
+
+	init();
 });
 
 // Utility Functions
@@ -108,38 +114,55 @@ function randomColor(colors) {
 	return colors[Math.floor(Math.random() * colors.length)];
 }
 
-// Objects
-function Object(x, y, radius, color) {
-	this.x = x;
-	this.y = y;
-	this.radius = radius;
-	this.color = color;
+// Classes
 
-	this.update = function () {
+var Item = function () {
+	function Item(options) {
+		_classCallCheck(this, Item);
 
-		this.draw();
-	};
+		var x = options.x,
+		    y = options.y,
+		    radius = options.radius,
+		    color = options.color;
 
-	this.draw = function () {
-		c.beginPath();
-		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-		c.fillStyle = this.color;
-		c.fill();
-		c.closePath();
-	};
-}
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+		this.color = color;
+	}
+
+	_createClass(Item, [{
+		key: 'update',
+		value: function update() {
+			this.draw();
+		}
+	}, {
+		key: 'draw',
+		value: function draw() {
+			c.beginPath();
+			c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+			c.fillStyle = this.color;
+			c.fill();
+			c.closePath();
+		}
+	}]);
+
+	return Item;
+}();
 
 // Implementation
 
 
+function init() {}
+
 // Animation Loop
 function animate() {
 	requestAnimationFrame(animate);
-
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
 }
 
+init();
 animate();
 
 /***/ })

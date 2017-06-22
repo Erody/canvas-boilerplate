@@ -44,8 +44,8 @@ function randomColor(colors) {
 }
 
 
-// Objects
-class Object {
+// Classes
+class Item {
 	constructor(options) {
 		const { x, y, radius, color } = options;
 		this.x = x;
