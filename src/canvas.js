@@ -7,7 +7,7 @@ canvas.height = innerHeight;
 
 
 // Variables
-let mouse = {
+const mouse = {
 	x: innerWidth / 2,
 	y: innerHeight / 2 
 };
@@ -21,12 +21,12 @@ const colors = [
 
 
 // Event Listeners
-addEventListener("mousemove", function(event) {
+addEventListener("mousemove", event => {
 	mouse.x = event.clientX;
 	mouse.y = event.clientY;
 });
 
-addEventListener("resize", function() {
+addEventListener("resize", () => {
 	canvas.width = innerWidth;	
 	canvas.height = innerHeight;
 
@@ -45,25 +45,29 @@ function randomColor(colors) {
 
 
 // Objects
-function Object(x, y, radius, color) {
-	this.x = x;
-	this.y = y;
-	this.radius = radius;
-	this.color = color;
+class Object {
+	constructor(options) {
+		const { x, y, radius, color } = options;
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+		this.color = color;
+	}
 
-	this.update = function() {
-		
+	update() {
 		this.draw();
-	};
+	}
 
-	this.draw = function() {
+	draw() {
 		c.beginPath();
-		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);	
+		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 		c.fillStyle = this.color;
 		c.fill();
 		c.closePath();
-	};
+	}
 }
+
+
 
 
 // Implementation
